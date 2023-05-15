@@ -19,7 +19,7 @@ jobs:
           echo "REPO_NAME=$(basename ${{ github.repository }})" >> $GITHUB_ENV
 
         # check out target repository
-      - name: checkout $GITHUB_REPOSITORY
+      - name: checkout target repository (this)
         uses: actions/checkout@v3
         with: 
           repository: $GITHUB_REPOSITORY
@@ -33,7 +33,7 @@ jobs:
           path: kanboard-ng/gettext-locale
 
         # fetch target repository for new translations
-      - name: fetch translations $GITHUB_REPOSITORY
+      - name: fetch translations
         run: 
           find ./$GITHUB_REPOSITORY/ -type f -name "*.php" | 
           xargs xgettext -o kanboard-ng/gettext-locale/${{ env.REPO_NAME }}.pot -L PHP -kt -ke --from-code=UTF-8 --add-comments
